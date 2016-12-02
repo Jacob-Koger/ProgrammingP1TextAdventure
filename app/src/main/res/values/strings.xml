@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ProgrammingGameTextAdventure</string>
+    <string name="welcome_text">Welcome!</string>
+    <string name="welcome_button_text">Let\'s Go!</string>
+    <string name="insert_name_hint">What is your name?</string>
+    <string name="_1st_response">1st Response</string>
+    <string name="_2nd_response">2nd Response</string>
+    <string name="_3rd_response">3rd Response</string>
+    <string name="_4th_response">4th Response</string>
+</resources>
