@@ -12,8 +12,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Objects;
-
 public class QuestionActivity extends AppCompatActivity implements OnClickListener {
 
     Button firstResponseButton;
@@ -57,7 +55,11 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
 
     private void firstQuestion() {
         Log.d(TAG, playerName);
-        if (!Objects.equals(playerName, "Brent")) {
+        boolean isBrentPlaying = false;
+        if (playerName.compareToIgnoreCase("Brent") == 0) {
+            isBrentPlaying = true;
+        }
+        if (!isBrentPlaying) {
             String question = "Hello, " + playerName + ". You are in a forest, with no idea how you got there you look to the sky to see it is either dusk or dawn, what do you do?";
             String firstResponse = "Walk forward";
             String secondResponse = "Check backpack";
@@ -105,6 +107,16 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
                     String secondResponse = "No, save it";
                     thirdResponseButton.setVisibility(View.INVISIBLE);
                     fourthResponseButton.setVisibility(View.INVISIBLE);
+                    OnClickListener firstButton = new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String question = "There is nothing happened as you click the switch trying to get it to work, what do you do?";
+                            String firstResponse = "See what is inside";
+                            String secondResponse = "Assume the batteries are dead";
+                            String thirdResponse = "Return flashlight to backpack";
+                            String fourthResponse = "Leave flashlight on ground";
+                        }
+                    };
                     setText(question, firstResponse, secondResponse, null, null, direction, items, this, this, this, this);
                 }
             };
@@ -123,14 +135,14 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
 
         } else {
             String question = "Hello, " + playerName + ". You are not allowed to live in this universe due to a large Hadron Collider exploding and destroying humanity";
-                    String firstResponse = "Leave";
-                    String secondResponse = "Leave";
-                    String thirdResponse = "Leave";
-                    String fourthResponse = "Leave";
-                    View.OnClickListener exception = new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            throw new BrentException("Can't have brent");
+            String firstResponse = "Leave";
+            String secondResponse = "Leave";
+            String thirdResponse = "Leave";
+            String fourthResponse = "Leave";
+            View.OnClickListener exception = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    throw new BrentException("Can't have brent");
                 }
             };
             setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse,
