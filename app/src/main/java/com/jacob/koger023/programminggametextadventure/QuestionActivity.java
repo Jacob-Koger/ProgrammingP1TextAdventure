@@ -51,6 +51,10 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
         secondResponseButton = (Button) findViewById(R.id.second_response_button);
         thirdResponseButton = (Button) findViewById(R.id.third_response_button);
         fourthResponseButton = (Button) findViewById(R.id.fourth_response_button);
+        firstResponseButton.setOnClickListener(this);
+        secondResponseButton.setOnClickListener(this);
+        thirdResponseButton.setOnClickListener(this);
+        fourthResponseButton.setOnClickListener(this);
         direction = "North";
         firstQuestion();
     }
@@ -63,84 +67,59 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
             String secondResponse = "Check backpack";
             String thirdResponse = "Walk left";
             String fourthResponse = "Walk right";
-            OnClickListener firstButton = new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String question = "You walk forward for what feels like forever, you start to notice light fading away, you are hungry, what do you do?";
-                    String firstResponse = "Continue walking";
-                    String secondResponse = "Check backpack";
-                    String thirdResponse = "Walk Left";
-                    String fourthResponse = "Walk Right";
-                    OnClickListener firstButton = new OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            String question = "You walk until you no longer can, you start hearing a howling, the moon is shining high, you sit down by the nearest tree, what now? ";
-                            String firstResponse = "Check backpack";
-                            String secondResponse = "Scan around you";
-                            String thirdResponse = "Try to sleep";
-                            String fourthResponse = "Try to stand";
-                            OnClickListener firstButton = new OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    String question = "You look in your backpack to find a flashlight, it feels heavy you assume it has batteries do you try to use it";
-                                    String firstResponse = "Yes";
-                                    String secondResponse = "No, save it";
-                                    thirdResponseButton.setVisibility(View.INVISIBLE);
-                                    fourthResponseButton.setVisibility(View.INVISIBLE);
-                                    setText(question, firstResponse, secondResponse, null, null, direction, items, this, this, this, this);
-
-                                }
-                            };
-                            setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse, direction, items, firstButton, this, this, this);
-                        }
-                    };
-                    setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse, direction, items, firstButton, this, this, this);
-                }
-            };
-            OnClickListener secondButton = new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String question = "You look in your backpack to find a flashlight, it feels heavy you assume it has batteries do you try to use it";
-                    String firstResponse = "Yes";
-                    String secondResponse = "No, save it";
-                    thirdResponseButton.setVisibility(View.INVISIBLE);
-                    fourthResponseButton.setVisibility(View.INVISIBLE);
-                    setText(question, firstResponse, secondResponse, null, null, direction, items, this, this, this, this);
-                }
-            };
-            OnClickListener thirdButton = new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                }
-            };
-            OnClickListener forthButton = new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            };
-            setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse, direction, items, firstButton, secondButton, thirdButton, forthButton);
+            String tag1 = "firstWalk";
+            String tag2 = "checkBackpack";
+            String tag3 = "left";
+            String tag4 = "right";
+            setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse, direction, items, tag1, tag2, tag3, tag4);
 
         } else {
+
             String question = "Hello, " + playerName + ". You are not allowed to live in this universe due to a large Hadron Collider exploding and destroying humanity";
-                    String firstResponse = "Leave";
-                    String secondResponse = "Leave";
-                    String thirdResponse = "Leave";
-                    String fourthResponse = "Leave";
-                    View.OnClickListener exception = new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            throw new BrentException("Can't have brent");
-                }
-            };
+            String firstResponse = "Leave";
+            String secondResponse = "Leave";
+            String thirdResponse = "Leave";
+            String fourthResponse = "Leave";
+            String tag1 = "brent";
             setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse,
-                    direction, items, exception, exception, exception, exception);
+                    direction, items, tag1, tag1, tag1, tag1);
         }
+    }
+
+    public void firstWalkForward() {
+
+        String question = "You walk forward for what feels like forever, you start to notice light fading away, you are hungry, what do you do?";
+        String firstResponse = "Continue walking";
+        String secondResponse = "Check backpack";
+        String thirdResponse = "Walk Left";
+        String fourthResponse = "Walk Right";
+        String tag1 = "secondWalk";
+        String tag2 = "checkBackpack";
+        String tag3 = "left2";
+        String tag4 = "right2";
+        setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse, direction, items, tag1, tag2, tag3, tag4);
+    }
+
+
+    public void secondwalkForward() {
+        String question = "You walk until you no longer can, you start hearing a howling, the moon is shining high, you sit down by the nearest tree, what now? ";
+        String firstResponse = "Check backpack";
+        String secondResponse = "Scan around you";
+        String thirdResponse = "Try to sleep";
+        String fourthResponse = "Try to stand";
+    }
+
+    public void checkBackpack() {
+        String question = "You look in your backpack to find a flashlight, it feels heavy you assume it has batteries do you try to use it";
+        String firstResponse = "Yes";
+        String secondResponse = "No, save it";
+        thirdResponseButton.setVisibility(View.INVISIBLE);
+        fourthResponseButton.setVisibility(View.INVISIBLE);
     }
 
     @SuppressLint("SetTextI18n")
     private void setText(String question, String first, String second, String third, String fourth, String direction, String items,
-                         OnClickListener one, OnClickListener two, OnClickListener three, OnClickListener four) {
+                         String tag1, String tag2, String tag3, String tag4) {
         questionTextView.setText(question);
         firstResponseButton.setText(first);
         secondResponseButton.setText(second);
@@ -148,15 +127,21 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
         fourthResponseButton.setText(fourth);
         directionTextView.setText(beginDirection + direction);
         itemTextView.setText(items);
-        firstResponseButton.setOnClickListener(one);
-        secondResponseButton.setOnClickListener(two);
-        thirdResponseButton.setOnClickListener(three);
-        fourthResponseButton.setOnClickListener(four);
+        firstResponseButton.setTag(tag1);
+        secondResponseButton.setTag(tag2);
+        thirdResponseButton.setTag(tag3);
+        fourthResponseButton.setTag(tag4);
     }
 
     @Override
     public void onClick(View view) {
-        setText(youDied, youDied, youDied, youDied, youDied, youDied, youDied, this, this, this, this);
+        String tag = (String) view.getTag();
+        if (Objects.equals(tag, "brent")){
+            throw new BrentException("Can't have brent");
+        }
+        if (Objects.equals(tag, "firstWalk")){
+            firstWalkForward();
+        }
     }
 }
 
