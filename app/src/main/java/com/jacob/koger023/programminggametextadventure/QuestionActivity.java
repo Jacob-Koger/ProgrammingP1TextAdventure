@@ -12,6 +12,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class QuestionActivity extends AppCompatActivity implements OnClickListener {
 
     Button firstResponseButton;
@@ -69,81 +71,10 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
             String secondResponse = "Check backpack";
             String thirdResponse = "Walk left";
             String fourthResponse = "Walk right";
-<<<<<<< HEAD
             String tag1 = "firstWalk";
             String tag2 = "checkBackpack";
             String tag3 = "left";
             String tag4 = "right";
-            setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse, direction, items, tag1, tag2, tag3, tag4);
-=======
-            OnClickListener firstButton = new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String question = "You walk forward for what feels like forever, you start to notice light fading away, you are hungry, what do you do?";
-                    String firstResponse = "Continue walking";
-                    String secondResponse = "Check backpack";
-                    String thirdResponse = "Walk Left";
-                    String fourthResponse = "Walk Right";
-                    OnClickListener firstButton = new OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            String question = "You walk until you no longer can, you start hearing a howling, the moon is shining high, you sit down by the nearest tree, what now? ";
-                            String firstResponse = "Check backpack";
-                            String secondResponse = "Scan around you";
-                            String thirdResponse = "Try to sleep";
-                            String fourthResponse = "Try to stand";
-                            OnClickListener firstButton = new OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    String question = "You look in your backpack to find a flashlight, it feels heavy you assume it has batteries do you try to use it";
-                                    String firstResponse = "Yes";
-                                    String secondResponse = "No, save it";
-                                    thirdResponseButton.setVisibility(View.INVISIBLE);
-                                    fourthResponseButton.setVisibility(View.INVISIBLE);
-                                    setText(question, firstResponse, secondResponse, null, null, direction, items, this, this, this, this);
-
-                                }
-                            };
-                            setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse, direction, items, firstButton, this, this, this);
-                        }
-                    };
-                    setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse, direction, items, firstButton, this, this, this);
-                }
-            };
-            OnClickListener secondButton = new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String question = "You look in your backpack to find a flashlight, it feels heavy you assume it has batteries do you try to use it";
-                    String firstResponse = "Yes";
-                    String secondResponse = "No, save it";
-                    thirdResponseButton.setVisibility(View.INVISIBLE);
-                    fourthResponseButton.setVisibility(View.INVISIBLE);
-                    OnClickListener firstButton = new OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            String question = "There is nothing happened as you click the switch trying to get it to work, what do you do?";
-                            String firstResponse = "See what is inside";
-                            String secondResponse = "Assume the batteries are dead";
-                            String thirdResponse = "Return flashlight to backpack";
-                            String fourthResponse = "Leave flashlight on ground";
-                        }
-                    };
-                    setText(question, firstResponse, secondResponse, null, null, direction, items, this, this, this, this);
-                }
-            };
-            OnClickListener thirdButton = new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                }
-            };
-            OnClickListener forthButton = new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            };
-            setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse, direction, items, firstButton, secondButton, thirdButton, forthButton);
->>>>>>> origin/master
 
         } else {
 
@@ -152,23 +83,13 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
             String secondResponse = "Leave";
             String thirdResponse = "Leave";
             String fourthResponse = "Leave";
-<<<<<<< HEAD
             String tag1 = "brent";
-=======
-            View.OnClickListener exception = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    throw new BrentException("Can't have brent");
-                }
-            };
->>>>>>> origin/master
             setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse,
                     direction, items, tag1, tag1, tag1, tag1);
         }
     }
 
     public void firstWalkForward() {
-
         String question = "You walk forward for what feels like forever, you start to notice light fading away, you are hungry, what do you do?";
         String firstResponse = "Continue walking";
         String secondResponse = "Check backpack";
@@ -217,10 +138,10 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
     @Override
     public void onClick(View view) {
         String tag = (String) view.getTag();
-        if (Objects.equals(tag, "brent")){
+        if (Objects.equals(tag, "brent")) {
             throw new BrentException("Can't have brent");
         }
-        if (Objects.equals(tag, "firstWalk")){
+        if (Objects.equals(tag, "firstWalk")) {
             firstWalkForward();
         }
     }
