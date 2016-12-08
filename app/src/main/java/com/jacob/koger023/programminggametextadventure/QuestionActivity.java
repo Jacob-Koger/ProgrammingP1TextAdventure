@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import java.util.Objects;
 
+import static android.R.attr.tag;
+
 public class QuestionActivity extends AppCompatActivity implements OnClickListener {
 
     Button firstResponseButton;
@@ -30,6 +32,7 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
     String direction;
     String items = "";
     String TAG = "Question Activity";
+    Boolean tired = false;
 
 
     @Override
@@ -75,9 +78,9 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
             String tag2 = "checkBackpack";
             String tag3 = "left";
             String tag4 = "right";
-
+            setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse,
+                    direction, items, tag1, tag2, tag3, tag4);
         } else {
-
             String question = "Hello, " + playerName + ". You are not allowed to live in this universe due to a large Hadron Collider exploding and destroying humanity";
             String firstResponse = "Leave";
             String secondResponse = "Leave";
@@ -99,34 +102,80 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
         String tag2 = "checkBackpack";
         String tag3 = "left2";
         String tag4 = "right2";
-        setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse, direction, items, tag1, tag2, tag3, tag4);
+        setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse,
+                direction, items, tag1, tag2, tag3, tag4);
     }
 
 
-    public void secondwalkForward() {
+    public void secondWalkForward() {
         String question = "You walk until you no longer can, you start hearing a howling, the moon is shining high, you sit down by the nearest tree, what now? ";
         String firstResponse = "Check backpack";
         String secondResponse = "Scan around you";
         String thirdResponse = "Try to sleep";
         String fourthResponse = "Try to stand";
+        String tag1 = "checkBackpack";
+        String tag2 = "scan";
+        String tag3 = "sleep";
+        String tag4 = "failtogetup";
+        tired = true;
+        setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse,
+                direction, items, tag1, tag2, tag3, tag4);
     }
 
     public void checkBackpack() {
-        String question = "You look in your backpack to find a flashlight, it feels heavy you assume it has batteries do you try to use it";
+        String question = "You look in your backpack to find a flashlight, it feels heavy you assume it has batteries do you try to use it?";
         String firstResponse = "Yes";
         String secondResponse = "No, save it";
+        items = "Items: Backpack, Flashlight";
         thirdResponseButton.setVisibility(View.INVISIBLE);
         fourthResponseButton.setVisibility(View.INVISIBLE);
+        String tag1 = "tryFlashlight";
+        String tag2 = "saveFlashlight";
+        setText(question, firstResponse, secondResponse, null, null,
+                direction, items, tag1, tag2, null, null);
     }
 
+    public void tryFlashlight() {
+        String question = "There is nothing happened as you click the switch trying to get it to work, what do you do?";
+        String firstResponse = "See what is inside";
+        String secondResponse = "Assume the batteries are dead";
+        String thirdResponse = "Return flashlight to backpack";
+        String fourthResponse = "Leave flashlight on ground";
+        String tag1 = "checkInsideFlashlight";
+        String tag2 = "saveFlashlight";
+        String tag3 = "saveFlashlight";
+        String tag4 = "leaveFlashlight";
+        thirdResponseButton.setVisibility(View.VISIBLE);
+        fourthResponseButton.setVisibility(View.VISIBLE);
+        setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse,
+                direction, items, tag1, tag2, tag3, tag4);
+    }
+    public void returnFlashlightToBag() {
+        thirdResponseButton.setVisibility(View.VISIBLE);
+        fourthResponseButton.setVisibility(View.VISIBLE);
+        if(tired) {
+            String question = "You return the flashlight to your bag, you must sleep";
+            String firstResponse = "Sleep";
+            String tag1 = "sleep";
+            secondResponseButton.setVisibility(View.INVISIBLE);
+            thirdResponseButton.setVisibility(View.INVISIBLE);
+            fourthResponseButton.setVisibility(View.INVISIBLE);
+            setText(question, firstResponse, null, null, null,
+                    direction, items, tag1, null, null, null);
+        }
+    }
+
+
     @SuppressLint("SetTextI18n")
-    private void setText(String question, String first, String second, String third, String fourth, String direction, String items,
-                         String tag1, String tag2, String tag3, String tag4) {
+    private void setText(String question, String first, String second, String third, String fourth,
+                         String direction, String items, String tag1, String tag2, String tag3,
+                         String tag4) {
         questionTextView.setText(question);
         firstResponseButton.setText(first);
         secondResponseButton.setText(second);
         thirdResponseButton.setText(third);
         fourthResponseButton.setText(fourth);
+
         directionTextView.setText(beginDirection + direction);
         itemTextView.setText(items);
         firstResponseButton.setTag(tag1);
@@ -143,6 +192,39 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
         }
         if (Objects.equals(tag, "firstWalk")) {
             firstWalkForward();
+        }
+        if (Objects.equals(tag, "secondWalk")) {
+            secondWalkForward();
+        }
+        if (Objects.equals(tag, "left")) {
+
+        }
+        if (Objects.equals(tag, "right")) {
+
+        }
+        if (Objects.equals(tag, "left2")) {
+
+        }
+        if (Objects.equals(tag, "right2")) {
+
+        }
+        if (Objects.equals(tag, "checkBackpack")) {
+            checkBackpack();
+        }
+        if (Objects.equals(tag, "tryFlashlight")) {
+            tryFlashlight();
+        }
+        if (Objects.equals(tag, "saveFlashlight")) {
+            returnFlashlightToBag();
+        }
+        if (Objects.equals(tag, "scan")) {
+
+        }
+        if (Objects.equals(tag, "sleep")) {
+
+        }
+        if (Objects.equals(tag, "failtogetup")) {
+
         }
     }
 }
