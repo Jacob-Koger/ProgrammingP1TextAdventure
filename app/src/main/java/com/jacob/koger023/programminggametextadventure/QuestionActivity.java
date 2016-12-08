@@ -137,9 +137,9 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
     public void tryFlashlight() {
         String question = "There is nothing happened as you click the switch trying to get it to work, what do you do?";
         String firstResponse = "See what is inside";
-        String secondResponse = "Assume the batteries are dead";
-        String thirdResponse = "Return flashlight to backpack";
-        String fourthResponse = "Leave flashlight on ground";
+        String secondResponse = "Do nothing";
+        String thirdResponse = "Place in backpack";
+        String fourthResponse = "Leave it";
         String tag1 = "checkInsideFlashlight";
         String tag2 = "saveFlashlight";
         String tag3 = "saveFlashlight";
@@ -230,6 +230,17 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
                 youDied, youDied, tag1, tag1, tag1, tag1);
     }
 
+    private void wasteTime() {
+        String question = "You waste so much time trying to open it, you starve to death";
+        firstResponseButton.setVisibility(View.VISIBLE);
+        secondResponseButton.setVisibility(View.VISIBLE);
+        thirdResponseButton.setVisibility(View.VISIBLE);
+        fourthResponseButton.setVisibility(View.VISIBLE);
+        String tag1 = "died";
+        setText(question, youDied, youDied, youDied, youDied,
+                youDied, youDied, tag1, tag1, tag1, tag1);
+    }
+
     @SuppressLint("SetTextI18n")
     private void setText(String question, String first, String second, String third, String fourth,
                          String direction, String items, String tag1, String tag2, String tag3,
@@ -284,10 +295,14 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
         if (Objects.equals(tag, "failtogetup")) {
             starve();
         }
-        if (Objects.equals(tag, "died")) {
+        if (Objects.equals(tag, "checkInsideFlashlight")) {
+            wasteTime();
         }
-        Intent intent = new Intent(QuestionActivity.this, MainActivity.class);
-        QuestionActivity.this.startActivity(intent);
+        if (Objects.equals(tag, "died")) {
+
+            Intent intent = new Intent(QuestionActivity.this, MainActivity.class);
+            QuestionActivity.this.startActivity(intent);
+        }
     }
 }
 
