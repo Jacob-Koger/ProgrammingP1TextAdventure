@@ -1,6 +1,7 @@
 package com.jacob.koger023.programminggametextadventure;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -13,8 +14,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Objects;
-
-import static android.R.attr.tag;
 
 public class QuestionActivity extends AppCompatActivity implements OnClickListener {
 
@@ -150,10 +149,11 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
         setText(question, firstResponse, secondResponse, thirdResponse, fourthResponse,
                 direction, items, tag1, tag2, tag3, tag4);
     }
+
     public void returnFlashlightToBag() {
         thirdResponseButton.setVisibility(View.VISIBLE);
         fourthResponseButton.setVisibility(View.VISIBLE);
-        if(tired) {
+        if (tired) {
             String question = "You return the flashlight to your bag, you must sleep";
             String firstResponse = "Sleep";
             String tag1 = "sleep";
@@ -163,8 +163,72 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
             setText(question, firstResponse, null, null, null,
                     direction, items, tag1, null, null, null);
         }
+        if (!tired) {
+            String question = "You get mauled by a wolf, you die";
+            firstResponseButton.setVisibility(View.VISIBLE);
+            secondResponseButton.setVisibility(View.VISIBLE);
+            thirdResponseButton.setVisibility(View.VISIBLE);
+            fourthResponseButton.setVisibility(View.VISIBLE);
+            String tag1 = "died";
+            setText(question, youDied, youDied, youDied, youDied,
+                    youDied, youDied, tag1, tag1, tag1, tag1);
+        }
     }
 
+    private void dieLeft() {
+        String question = "You walk to the left off of a cliff, you die with your carcass in pieces";
+        firstResponseButton.setVisibility(View.VISIBLE);
+        secondResponseButton.setVisibility(View.VISIBLE);
+        thirdResponseButton.setVisibility(View.VISIBLE);
+        fourthResponseButton.setVisibility(View.VISIBLE);
+        String tag1 = "died";
+        setText(question, youDied, youDied, youDied, youDied,
+                youDied, youDied, tag1, tag1, tag1, tag1);
+    }
+
+    private void dieRight() {
+        String question = "You walk into a cave and get lost, you die of starvation";
+        firstResponseButton.setVisibility(View.VISIBLE);
+        secondResponseButton.setVisibility(View.VISIBLE);
+        thirdResponseButton.setVisibility(View.VISIBLE);
+        fourthResponseButton.setVisibility(View.VISIBLE);
+        String tag1 = "died";
+        setText(question, youDied, youDied, youDied, youDied,
+                youDied, youDied, tag1, tag1, tag1, tag1);
+    }
+
+    private void findDeath() {
+        String question = "You find the horseman of death, you die";
+        firstResponseButton.setVisibility(View.VISIBLE);
+        secondResponseButton.setVisibility(View.VISIBLE);
+        thirdResponseButton.setVisibility(View.VISIBLE);
+        fourthResponseButton.setVisibility(View.VISIBLE);
+        String tag1 = "died";
+        setText(question, youDied, youDied, youDied, youDied,
+                youDied, youDied, tag1, tag1, tag1, tag1);
+    }
+
+    private void sleepPermanently() {
+        String question = "You sleep forever, you die";
+        firstResponseButton.setVisibility(View.VISIBLE);
+        secondResponseButton.setVisibility(View.VISIBLE);
+        thirdResponseButton.setVisibility(View.VISIBLE);
+        fourthResponseButton.setVisibility(View.VISIBLE);
+        String tag1 = "died";
+        setText(question, youDied, youDied, youDied, youDied,
+                youDied, youDied, tag1, tag1, tag1, tag1);
+    }
+
+    private void starve() {
+        String question = "You cannot move, you are that tired, you die of starvation";
+        firstResponseButton.setVisibility(View.VISIBLE);
+        secondResponseButton.setVisibility(View.VISIBLE);
+        thirdResponseButton.setVisibility(View.VISIBLE);
+        fourthResponseButton.setVisibility(View.VISIBLE);
+        String tag1 = "died";
+        setText(question, youDied, youDied, youDied, youDied,
+                youDied, youDied, tag1, tag1, tag1, tag1);
+    }
 
     @SuppressLint("SetTextI18n")
     private void setText(String question, String first, String second, String third, String fourth,
@@ -197,16 +261,10 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
             secondWalkForward();
         }
         if (Objects.equals(tag, "left")) {
-
+            dieLeft();
         }
         if (Objects.equals(tag, "right")) {
-
-        }
-        if (Objects.equals(tag, "left2")) {
-
-        }
-        if (Objects.equals(tag, "right2")) {
-
+            dieRight();
         }
         if (Objects.equals(tag, "checkBackpack")) {
             checkBackpack();
@@ -218,14 +276,18 @@ public class QuestionActivity extends AppCompatActivity implements OnClickListen
             returnFlashlightToBag();
         }
         if (Objects.equals(tag, "scan")) {
-
+            findDeath();
         }
         if (Objects.equals(tag, "sleep")) {
-
+            sleepPermanently();
         }
         if (Objects.equals(tag, "failtogetup")) {
-
+            starve();
         }
+        if (Objects.equals(tag, "died")) {
+        }
+        Intent intent = new Intent(QuestionActivity.this, MainActivity.class);
+        QuestionActivity.this.startActivity(intent);
     }
 }
 
